@@ -8,11 +8,9 @@ The plugin allows analysts to launch VirusTotal searches for bytes, code, and fu
 
 * **Search for bytes** Performs a raw byte search in VirusTotal for the selected instruction sequence.
 * **Search for similar code** Searches for functionally similar code by wildcarding memory addresses and offsets before querying VirusTotal.
-
 * **Search for similar functions** Automatically detects the boundaries of the current function and searches for similar functions, without requiring manual selection.
-* **Automatic sample upload (optional)** On first run, the plugin prompts for consent to upload samples not found on VirusTotal. This behavior can be modified at any time from Binary Ninja settings.
-
 * **Dedicated Strings sidebar** Provides a custom sidebar tab to browse extracted strings and query them directly on VirusTotal.
+* **Automatic sample upload (optional)** On first run, the plugin prompts for consent to upload samples not found on VirusTotal. This behavior can be modified at any time from Binary Ninja settings.
 * **Code Insight (coming soon)**
   Planned integration with VirusTotal Code Insight for AI-assisted analysis.
 
@@ -20,6 +18,12 @@ The plugin allows analysts to launch VirusTotal searches for bytes, code, and fu
 > VTGrep searches rely on an active VirusTotal Enterprise session in your web browser.
 
 ![Code Similarity Search from Binary Ninja](images/vt_search_similar_code.gif)
+
+### String Search Integration
+
+Strings extracted from the binary can be browsed in a dedicated sidebar and queried directly on VirusTotal with a single click.
+
+![VirusTotal String Search from Binary Ninja](images/vt_search_string.gif)
 
 ## Installation
 
@@ -57,6 +61,8 @@ Your VirusTotal API key can be configured directly inside Binary Ninja:
 4. (Optional) Adjust automatic upload settings
 
 All preferences are stored in the Binary Ninja user configuration directory.
+
+![Setup Virus Total Api Key](images/vt_config.png)
 
 ## Disclaimer
 
