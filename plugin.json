@@ -1,0 +1,36 @@
+{
+  "pluginmetadataversion": 2,
+  "name": "vt-binary-ninja-plugin",
+  "type": [
+    "core",
+    "ui",
+    "helper"
+  ],
+  "api": [
+    "python3"
+  ],
+  "description": "Integrates VirusTotal's powerful analysis capabilities directly into your reverse engineering workflow.",
+  "longdescription": "",
+  "license": {
+    "name": "Apache-2.0",
+    "text": "Copyright (c) 2025 Kevin Muñoz\n\nLicensed under the Apache License, Version 2.0 (the \"License\");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\n    http://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the LICENSE file for the specific language governing permissions and\nlimitations under the License.\n"
+  },
+  "platforms": [
+    "Darwin",
+    "Linux",
+    "Windows"
+  ],
+  "installinstructions": {
+    "Darwin": "no special instructions, package manager is recommended",
+    "Windows": "no special instructions, package manager is recommended",
+    "Linux": "no special instructions, package manager is recommended"
+  },
+  "dependencies": {
+    "pip": [
+      "requests"
+    ]
+  },
+  "version": "1.0.0",
+  "author": "Kevin Muñoz",
+  "minimumbinaryninjaversion": 4000
+}

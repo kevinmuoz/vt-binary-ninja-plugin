@@ -1,0 +1,3 @@
+DEBUG = False
+SAVE_LOG_TO_FILE = False
+VT_BN_PLUGIN_VERSION = "1.00"
