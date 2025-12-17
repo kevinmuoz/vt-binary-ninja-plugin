@@ -17,7 +17,7 @@ from binaryninjaui import (
 from ..ui.commands.grep_bytes_command import VTGrepBytesCommand
 from ..ui.commands.grep_similar_code_command import VTGrepSimilarCodeCommand
 from ..ui.commands.grep_similar_functions_command import VTGrepSimilarFunctionsCommand
-
+from ..ui.commands.code_insights_command import CodeInsightFactoryCommand
 
 class VTAction:
     """Represents a VirusTotal context menu action."""
@@ -38,11 +38,11 @@ class VTAction:
 class VTActions:
     """Registry of all VirusTotal context menu actions."""
 
-    # ASK_TO_CODE_INSIGHT = VTAction(
-    #     name="Ask Code Insight",
-    #     description="Ask VirusTotal Code Insight for the current function",
-    #     priority=0,
-    # )
+    ASK_TO_CODE_INSIGHT = VTAction(
+        name="Ask Code Insight",
+        description="Ask VirusTotal Code Insight for the current function",
+        priority=0,
+    )
 
     SEARCH_BYTES = VTAction(
         name="Search for bytes",
@@ -63,7 +63,7 @@ class VTActions:
     )
 
     ALL: Tuple[VTAction, ...] = (
-        # ASK_TO_CODE_INSIGHT,
+        ASK_TO_CODE_INSIGHT,
         SEARCH_BYTES,
         SEARCH_SIMILAR_CODE,
         SEARCH_SIMILAR_FUNCTIONS,
@@ -111,20 +111,20 @@ class VTActionHandlers:
     """Callback handlers that bridge UIAction to Command classes."""
 
     # Ask code insight
-    # @staticmethod
-    # def execute_ask_code_insight(ctx: UIActionContext) -> None:
-    #     data = ContextExtractor.get_function(ctx)
-    #     if data:
-    #         bv, func = data
-    #         CodeInsightFactoryCommand.execute(bv, func)
+    @staticmethod
+    def execute_ask_code_insight(ctx: UIActionContext) -> None:
+        data = ContextExtractor.get_function(ctx)
+        if data:
+            bv, func = data
+            CodeInsightFactoryCommand.execute(bv, func)
 
-    # @staticmethod
-    # def is_ask_code_insight_available(ctx: UIActionContext) -> bool:
-    #     data = ContextExtractor.get_function(ctx)
-    #     if not data:
-    #         return False
-    #     bv, func = data
-    #     return CodeInsightFactoryCommand.is_command_available(bv, func)
+    @staticmethod
+    def is_ask_code_insight_available(ctx: UIActionContext) -> bool:
+        data = ContextExtractor.get_function(ctx)
+        if not data:
+            return False
+        bv, func = data
+        return CodeInsightFactoryCommand.is_command_available(bv, func)
 
     # Search for bytes
     @staticmethod
@@ -221,16 +221,16 @@ def _register_ui_actions() -> None:
     handler = UIActionHandler.globalActions()
 
     # Ask code insight
-    # action_code_insight = VTActions.ASK_TO_CODE_INSIGHT
-    # if not UIAction.isActionRegistered(action_code_insight.full_name):
-    #     UIAction.registerAction(action_code_insight.full_name)
-    # handler.bindAction(
-    #     action_code_insight.full_name,
-    #     UIAction(
-    #         VTActionHandlers.execute_ask_code_insight,
-    #         VTActionHandlers.is_ask_code_insight_available,
-    #     ),
-    # )
+    action_code_insight = VTActions.ASK_TO_CODE_INSIGHT
+    if not UIAction.isActionRegistered(action_code_insight.full_name):
+        UIAction.registerAction(action_code_insight.full_name)
+    handler.bindAction(
+        action_code_insight.full_name,
+        UIAction(
+            VTActionHandlers.execute_ask_code_insight,
+            VTActionHandlers.is_ask_code_insight_available,
+        ),
+    )
 
     # Search for bytes
     action_bytes = VTActions.SEARCH_BYTES

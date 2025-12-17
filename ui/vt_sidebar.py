@@ -18,7 +18,7 @@ from PySide6.QtGui import QPixmap, QImage, QPainter, QFont, QColor
 
 from .resources import qt6logo # noqa: F401
 from .tabs.vt_grep_tab import VTGrepTab
-# from .tabs.code_insight_tab import CodeInsightTab
+from .tabs.code_insight_tab import CodeInsightTab
 import logging
 
 VT_ICON_RESOURCE = ":vtlogo/vt_logo.png"
@@ -138,8 +138,8 @@ class VTSidebarWidget(SidebarWidget):
         self.tabs.setTabPosition(QTabWidget.North)
 
         # Create tabs
-        # self.code_tab = CodeInsightTab(self, self.bv)
-        # self.tabs.addTab(self.code_tab, "Code Insight")
+        self.code_tab = CodeInsightTab(self, self.bv)
+        self.tabs.addTab(self.code_tab, "Code Insight Notebook")
 
         self.vtgrep_tab = VTGrepTab(self, self.bv)
         self.tabs.addTab(self.vtgrep_tab, "VT Grep")
@@ -172,10 +172,10 @@ class VTSidebarWidget(SidebarWidget):
             self.bv = new_bv
 
             # Update child tabs
-            # if hasattr(self, 'code_tab'):
-            #     self.code_tab.bv = new_bv
-            #     if hasattr(self.code_tab, '_update_ui_state'):
-            #         self.code_tab._update_ui_state()
+            if hasattr(self, 'code_tab'):
+                self.code_tab.bv = new_bv
+                if hasattr(self.code_tab, '_update_ui_state'):
+                    self.code_tab._update_ui_state()
 
             if hasattr(self, "vtgrep_tab"):
                 self.vtgrep_tab.bv = new_bv
@@ -186,6 +186,11 @@ class VTSidebarWidget(SidebarWidget):
 
         except Exception as e:
             logging.error(f"[VT] Error in notifyViewChanged: {e}")
+
+    def show_code_insight_tab(self):
+        """Public method to switch to the Code Insight tab"""
+        if hasattr(self, 'tabs') and hasattr(self, 'code_tab'):
+            self.tabs.setCurrentWidget(self.code_tab)
 
 
 class VTSidebarWidgetType(SidebarWidgetType):
