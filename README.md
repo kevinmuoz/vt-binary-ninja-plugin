@@ -54,7 +54,7 @@ Strings extracted from the binary can be browsed in a dedicated sidebar and quer
 
 ---
 
-> **Note**  
+> [!NOTE] 
 > **VTGrep** searches rely on an active **VirusTotal Enterprise** session in your web browser.
 >
 > **Code Insight requires a VirusTotal API key** (free, no credit card required).
