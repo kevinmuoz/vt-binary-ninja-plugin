@@ -1,6 +1,6 @@
 {
   "pluginmetadataversion": 2,
-  "name": "vt-binary-ninja-plugin",
+  "name": "VirusTotal Plugin For Binary Ninja",
   "type": [
     "core",
     "ui",
@@ -30,7 +30,7 @@
       "requests"
     ]
   },
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": "Kevin Muñoz",
   "minimumbinaryninjaversion": 4000
 }
