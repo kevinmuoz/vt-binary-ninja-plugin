@@ -110,6 +110,12 @@ All preferences are stored in the Binary Ninja user configuration directory.
 
 ---
 
+## Acknowledgements
+
+This plugin was inspired in part by the design and workflow of the official VirusTotal IDA Pro plugin.  
+Special thanks to Gerardo Fernández (VirusTotal / Google) for the technical discussions that helped shape several of the integration decisions.
+
+
 ## Disclaimer
 
 This is an unofficial, community-maintained plugin and is not affiliated with or endorsed by VirusTotal or Google.
