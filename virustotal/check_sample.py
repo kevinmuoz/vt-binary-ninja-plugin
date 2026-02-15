@@ -99,5 +99,5 @@ class CheckSample(bn.BackgroundTaskThread):
     def run(self):
         self.progress = f"Starting check for {os.path.basename(self.input_file)}..."
 
-        if self.file_exists_on_disk() and self.check_file_missing_in_VT() and self.auto_upload:
+        if self.auto_upload and self.file_exists_on_disk() and self.check_file_missing_in_VT():
             self.upload_file_to_VT()
