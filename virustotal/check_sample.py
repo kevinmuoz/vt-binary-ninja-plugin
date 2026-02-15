@@ -17,8 +17,8 @@ class CheckSample(bn.BackgroundTaskThread):
 
         logging.debug(f"[VT Plugin] Init CheckSample for {bv.file.filename}")
 
-        self.file_hash = self.get_file_sha256(self.bv.file.filename)
         self.input_file = self.bv.file.filename
+        self.file_hash = self.get_file_sha256(self.bv.file.filename)
         self.client = VTClient(api_key, user_agent="BN VT Plugin Upload")
 
         logging.debug(f"[VT Plugin] File SHA256: {self.file_hash}")
@@ -28,8 +28,14 @@ class CheckSample(bn.BackgroundTaskThread):
             can_cancel=False,
         )
 
+    def file_exists_on_disk(self) -> bool:
+        """Check if the input file exists on disk."""
+        return os.path.isfile(self.input_file)
+
     def get_file_sha256(self, filepath):
         """Get SHA256 hash of the file."""
+        if not self.file_exists_on_disk():
+            return None
         with open(filepath, "rb") as f:
             return hashlib.sha256(f.read()).hexdigest()
 
@@ -93,5 +99,5 @@ class CheckSample(bn.BackgroundTaskThread):
     def run(self):
         self.progress = f"Starting check for {os.path.basename(self.input_file)}..."
 
-        if self.check_file_missing_in_VT() and self.auto_upload:
+        if self.file_exists_on_disk() and self.check_file_missing_in_VT() and self.auto_upload:
             self.upload_file_to_VT()
