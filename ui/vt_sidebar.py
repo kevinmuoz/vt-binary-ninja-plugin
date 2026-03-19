@@ -19,6 +19,7 @@ from PySide6.QtGui import QPixmap, QImage, QPainter, QFont, QColor
 from .resources import qt6logo # noqa: F401
 from .tabs.vt_grep_tab import VTGrepTab
 from .tabs.code_insight_tab import CodeInsightTab
+from .tabs.summary.vt_summary_tab import VTSummaryTab
 import logging
 
 VT_ICON_RESOURCE = ":vtlogo/vt_logo.png"
@@ -138,6 +139,9 @@ class VTSidebarWidget(SidebarWidget):
         self.tabs.setTabPosition(QTabWidget.North)
 
         # Create tabs
+        self.summary_tab = VTSummaryTab(parent=self, bv=self.bv)
+        self.tabs.addTab(self.summary_tab, "Summary")
+
         self.code_tab = CodeInsightTab(self, self.bv)
         self.tabs.addTab(self.code_tab, "Code Insight Notebook")
 
@@ -163,6 +167,7 @@ class VTSidebarWidget(SidebarWidget):
 
     def notifyViewChanged(self, view_frame):
         """Called when view/file changes."""
+        logging.debug("[VT Sidebar] View changed, updating state")
         if not self._is_alive():
             return
 
@@ -172,6 +177,11 @@ class VTSidebarWidget(SidebarWidget):
             self.bv = new_bv
 
             # Update child tabs
+            if hasattr(self, 'summary_tab'):
+                self.summary_tab.bv = new_bv
+                self.summary_tab._invalidate_cache()
+                self.summary_tab._update_ui_state()
+
             if hasattr(self, 'code_tab'):
                 self.code_tab.bv = new_bv
                 if hasattr(self.code_tab, '_update_ui_state'):
