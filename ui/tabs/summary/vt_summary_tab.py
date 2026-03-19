@@ -174,7 +174,6 @@ class VTSummaryTab(QWidget):
         layout = QVBoxLayout(self)
         layout.setContentsMargins(0, 0, 0, 0)
         layout.addWidget(self.stack)
-        self.stack.setCurrentIndex(self.PAGE_NOT_FOUND)
 
     # Page 0: No API key
     def _create_no_api_key_page(self) -> QWidget:
