@@ -1,6 +1,6 @@
-# Copyright 2025 Google Inc. All Rights Reserved.
+# Copyright 2025 - 2026 Google Inc. All Rights Reserved.
 #
-# Modifications Copyright 2025 Kevin Muñoz
+# Modifications Copyright 2025 - 2026 Kevin Muñoz
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
