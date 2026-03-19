@@ -1,6 +1,6 @@
 from ..ui.dialogs.consent_upload import show_consent_upload_dialog
 from .vt_settings import settings
-from ..virustotal.check_sample import CheckSample
+from ..virustotal.tasks.check_sample import CheckSample
 import binaryninja as bn
 import logging
 

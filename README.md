@@ -4,16 +4,38 @@ An unofficial Binary Ninja plugin that integrates VirusTotal into reverse engine
 
 The plugin allows analysts to run VirusTotal searches and AI-assisted Code Insight analysis directly from Binary Ninja, without breaking their analysis flow.
 
----
-
 ## Features
+
+### VirusTotal Summary Tab
+
+The plugin includes a **VirusTotal Summary tab** that provides a complete detection overview for the currently opened binary.
+
+- **Detection overview**  
+  Visual breakdown of detections across all AV engines, including malicious, suspicious, and clean results.
+
+- **AV results table**  
+  Detailed per-engine results, allowing analysts to quickly identify detections and compare classifications.
+
+- **Code Insight integration**  
+  When available, the tab displays AI-powered [Code Insight analysis](https://blog.virustotal.com/2023/04/introducing-virustotal-code-insight.html), including a high-level explanation and verdict.
+
+- **Metadata & reputation**  
+  Shows file type, community score, first submission date, last analysis date, and associated tags.
+
+- **Direct VirusTotal access**  
+  Open the full report in VirusTotal with a single click.
+
+- **Manual upload support**  
+  If the file is not present in VirusTotal, it can be uploaded directly from the tab.
+
+![VirusTotal Summary Tab](images/vt_summary.png)
 
 ### Code Insight Notebook
 
 The plugin includes a fully integrated **Code Insight Notebook** that brings VirusTotal Code Insight directly into Binary Ninja.
 
 - **AI-assisted analysis**  
-  Request summaries and detailed descriptions for functions from disassembly or decompiled views.
+  Request summaries and detailed descriptions for functions from disassembly or decompiled views using the official [VirusTotal analysis API](https://docs.virustotal.com/reference/analyse-binary).
 
 - **Persistent notebook**  
   Accepted analyses are stored locally and can be reloaded across Binary Ninja sessions.
@@ -29,15 +51,11 @@ The plugin includes a fully integrated **Code Insight Notebook** that brings Vir
 
 ![Code Insight Notebook](images/vt_code_insight.png)
 
----
-
 ### String Search Integration
 
 Strings extracted from the binary can be browsed in a dedicated sidebar and queried directly on VirusTotal with a single click.
 
 ![VirusTotal String Search from Binary Ninja](images/vt_search_string.gif)
-
----
 
 ### Code Similarity & VTGrep
 
@@ -52,9 +70,7 @@ Strings extracted from the binary can be browsed in a dedicated sidebar and quer
 
 ![Code Similarity Search from Binary Ninja](images/vt_search_similar_code.gif)
 
----
-
-> [!NOTE] 
+> [!NOTE]
 > **VTGrep** searches rely on an active **VirusTotal Enterprise** session in your web browser.
 >
 > **Code Insight requires a VirusTotal API key** (free, no credit card required).
@@ -62,8 +78,6 @@ Strings extracted from the binary can be browsed in a dedicated sidebar and quer
 > - **Code Insight** only sends the selected function code for analysis.  
 >   The full binary is never uploaded as part of Code Insight requests.
 > - **Sample uploads** are optional and only occur if explicitly enabled during the initial consent prompt.
-
----
 
 ## Installation
 
@@ -79,8 +93,6 @@ The plugin can be installed directly from the **Binary Ninja Plugin Manager**.
 
 If installing manually, ensure that the `requests` module is available in Binary Ninja’s embedded Python environment.
 
----
-
 ## Configuration
 
 ### First-Time Run
@@ -92,8 +104,6 @@ On first execution, the plugin will prompt for consent to upload samples that ar
 - **Cancel**: Disable the plugin for the current session.
 
 This setting can be changed at any time from Binary Ninja settings.
-
----
 
 ### API Key Configuration (for Code Insight)
 
@@ -108,13 +118,10 @@ All preferences are stored in the Binary Ninja user configuration directory.
 
 ![Setup VirusTotal API Key](images/vt_config.png)
 
----
-
 ## Acknowledgements
 
 This plugin was inspired in part by the design and workflow of the official VirusTotal IDA Pro plugin.  
 Special thanks to Gerardo Fernández (VirusTotal / Google) for the technical discussions that helped shape several of the integration decisions.
-
 
 ## Disclaimer
 

@@ -2,7 +2,7 @@ import binaryninja as bn
 import os
 import logging
 import hashlib
-from .vtclient import VTClient
+from ..vtclient import VTClient
 
 
 class CheckSample(bn.BackgroundTaskThread):
