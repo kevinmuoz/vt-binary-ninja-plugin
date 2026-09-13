@@ -260,13 +260,31 @@ class QueryCodeInsight(bn.BackgroundTaskThread):
                 logging.debug('[VT Plugin] ERROR message: %s', self._error_msg)
             return None
         
-        try:
-            decoded_bytes = base64.urlsafe_b64decode(answer)
-            return decoded_bytes
-        except Exception as e:
-            logging.error(f'[VT Plugin] ERROR decoding Code Insight response: {e}')
-            self._error_msg = "Failed to decode response"
-            return None
+        # Current API response:
+        # {
+        #     "data": {
+        #         "summary": "...",
+        #         "description": "..."
+        #     }
+        # }
+        if isinstance(answer, dict):
+            return json.dumps(answer).encode("utf-8")
+
+        # Legacy API response:
+        # {
+        #     "data": "<base64-encoded JSON>"
+        # }
+        if isinstance(answer, str):
+            try:
+                return base64.urlsafe_b64decode(answer)
+            except Exception as e:
+                logging.error(f'[VT Plugin] ERROR decoding Code Insight response: {e}')
+                self._error_msg = "Failed to decode response"
+                return None
+
+        logging.error(f'[VT Plugin] Unexpected Code Insight response type: ' f'{type(answer).__name__}')
+        self._error_msg = "Unexpected Code Insight response format"
+        return None
 
     def _build_payload(self) -> dict:
         """Build the API request payload.
